@@ -64,6 +64,12 @@ function validate(x) {
       						return;
       					} 
     				}
+				if (x.my_pwd.value == x.my_id.value) {
+    					alert("아이디와 비밀번호는 똑같이 쓸 수 없습니다..");
+    					x.my_pwd.value=x.my_pwd_ok.value="";
+    					x.my_pwd.focus();
+    					return;
+    				} 
 				// 이메일의 타당성 검사
 				var mail = document.getElementById("my_mail");
 				var mail_count = 0;
@@ -175,16 +181,17 @@ function validate(x) {
     					alert("이름을 입력해주세요")
     					x.my_name.focus();
     					return;
-    				}// 이름 타당성 검사
+    				}// 주민번호 타당성 검사
     				if (x.my_reg.value=="") {
     					alert("주민번호를 입력해주세요")
     					x.my_reg.focus();
     					return;
-    				}// 이름 타당성 검사
+    				}// 주민번호 타당성 검사
     				if (x.my_reg_2.value=="") {
     					alert("주민번호를 입력해주세요")
     					x.my_reg_2.focus();
     					return;
     				}
+				document.getElementById("myForm").submit();
 				
 			}
