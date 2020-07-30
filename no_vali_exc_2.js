@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+
 function regck1() {
    var reg_2 = document.getElementById("my_reg_2").value;
    if(reg_2 != ""){
@@ -22,25 +24,25 @@ function regck() {
       realmonth = "0"+realmonth;
    }
    if(reg.length != 6 || reg_2.length != 7){
-      alert("ÁÖ¹Î¹øÈ£ ¾ÕÀÚ¸®´Â 6±ÛÀÚ,µŞÀÚ¸®´Â 7±ÛÀÚÀÔ´Ï´Ù.");
+      alert("ì£¼ë¯¼ë²ˆí˜¸ ì•ìë¦¬ëŠ” 6ê¸€ì,ë’·ìë¦¬ëŠ” 7ê¸€ìì…ë‹ˆë‹¤.");
       regclear();
       return 0;
    }
    
    if(regmonth<1 || regmonth>13 || regday<1 || regday>31){
-      alert("¿ùÀº 1-12¿ù, ³¯Â¥´Â 1-31ÀÏ ÀÎÁö Ã¼Å©ÇØÁÖ¼¼¿ä");
+      alert("ì›”ì€ 1-12ì›”, ë‚ ì§œëŠ” 1-31ì¼ ì¸ì§€ ì²´í¬í•´ì£¼ì„¸ìš”");
       regclear();
       return 0;
    }
    
    if(isNaN(reg) || isNaN(reg_2)){
-      alert("¼ıÀÚ¸¸ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      alert("ìˆ«ìë§Œ ì…ë ¥í•´ì£¼ì„¸ìš”");
       regclear();
       return 0;
    }
    
    if(isKorJumin(reg,reg_2) != true){
-      alert("ÁÖ¹Î¹øÈ£ À¯È¿¼ºÀÌ ÀûÇÕÇÏÁö ¾Ê½À´Ï´Ù.")
+      alert("ì£¼ë¯¼ë²ˆí˜¸ ìœ íš¨ì„±ì´ ì í•©í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.")
       regclear();
       return 0;
    }
@@ -50,12 +52,12 @@ function regck() {
    }else if(reggender == 3 || reggender == 4){
       regyear = 20 + reg.substring(0,2);
    }else{
-      alert("µŞÀÚ¸® Ã¹¹øÂ°¼ıÀÚ´Â 1-4±îÁö¸¸ Çã¿ëµË´Ï´Ù")
+      alert("ë’·ìë¦¬ ì²«ë²ˆì§¸ìˆ«ìëŠ” 1-4ê¹Œì§€ë§Œ í—ˆìš©ë©ë‹ˆë‹¤")
       regclear();
       return 0;
    }
    if(parseInt(regyear+regmonth+regday) >= parseInt(realyear+""+realmonth+realdate)){
-      alert("¿À´Ã³¯Â¥ ¶Ç´Â ¹Ì·¡ÀÇ ³¯Â¥´Â ÀÔ·ÂÇÒ ¼ö ¾ø½À´Ï´Ù.");
+      alert("ì˜¤ëŠ˜ë‚ ì§œ ë˜ëŠ” ë¯¸ë˜ì˜ ë‚ ì§œëŠ” ì…ë ¥í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
       regclear();
       return 0;
    }
