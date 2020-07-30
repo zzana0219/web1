@@ -73,6 +73,9 @@ function validate(x) {
 				if ( mail_txt == "" )
 				{
 					alert("메일 주소를 입력하세요.");
+					x.my_mail.focus();
+					x.my_mail.value = "";
+					return;
 				}
 				for(var i=0; i < mail_txt.length;i++)
 				{
@@ -91,7 +94,6 @@ function validate(x) {
 				}
 				if(mail_count == 1)
 				{
-					alert(mail_count_id);
 					if(mail_txt[0] == "@")
 					{	
 						alert("이메일 아이디를 입력하세요.");
@@ -172,6 +174,16 @@ function validate(x) {
     				if (x.my_name.value=="") {
     					alert("이름을 입력해주세요")
     					x.my_name.focus();
+    					return;
+    				}// 이름 타당성 검사
+    				if (x.my_reg.value=="") {
+    					alert("주민번호를 입력해주세요")
+    					x.my_reg.focus();
+    					return;
+    				}// 이름 타당성 검사
+    				if (x.my_reg_2.value=="") {
+    					alert("주민번호를 입력해주세요")
+    					x.my_reg_2.focus();
     					return;
     				}
 				
