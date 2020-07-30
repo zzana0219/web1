@@ -1,5 +1,3 @@
-<meta charset="utf-8">
-
 function regck1() {
    var reg_2 = document.getElementById("my_reg_2").value;
    if(reg_2 != ""){
