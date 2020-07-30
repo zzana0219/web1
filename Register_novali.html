@@ -1,0 +1,297 @@
+<html>
+	<head>
+		<title> 회원가입 페이지 </title>	
+		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script language="javascript">
+    		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 
+		//내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+
+    		function sample4_execDaumPostcode() {
+        		new daum.Postcode({
+            		oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample4_postcode").value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+	</script>
+
+		<script language="javascript">
+			function validate(x) {
+				var alphaDigit= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+				//아이디의 입력 타당성 검사
+    				if (x.my_id.value=="") {
+    					alert("ID를 입력해 주세요.");
+    					x.my_id.focus();
+    					return; 
+    				}
+    				if (x.my_id.value.length < 4 || x.my_id.value.length > 12){
+    					alert("ID는 4~12자 이내여야 합니다.");
+    					x.my_id.focus();
+    					return;
+    				}
+    				if (x.my_id.value.indexOf(" ") >= 0) {
+    					alert("ID에는 공백이 들어가면 안됩니다.");
+    					x.my_id.focus();
+    					return;
+    				}
+    				for (i=0; i<x.my_id.value.length; i++) {
+      					if (alphaDigit.indexOf(x.my_id.value.substring(i, i+1)) == -1) {
+      						alert("ID는 영문과 숫자의 조합만 사용할 수 있습니다.");
+      						x.my_id.focus();
+      						return;
+      					}
+    				}
+
+				// 비밀번호의  타당성 검사
+    				if (x.my_pwd.value=="") {
+    					alert("비밀번호를 입력하셔야 합니다.")
+    					x.my_pwd.focus();
+    					return;
+    				}
+				if (x.my_pwd.value.length < 4 || x.my_pwd.value.length > 12) {
+    					alert("비밀번호는 4~12자 이내여야 합니다.");
+    					x.my_pwd.value="";
+    					x.my_pwd.focus();
+    					return;
+    				}
+				if (x.my_pwd_ok.value==""){
+    					alert("비밀번호를 확인 입력해 주셔야 합니다.")
+    					x.my_pwd_ok.focus();
+    					return;
+    				}
+				if (x.my_pwd.value != x.my_pwd_ok.value) {
+    					alert("비밀번호가 서로 일치하지 않습니다.");
+    					x.my_pwd.value=x.my_pwd_ok.value="";
+    					x.my_pwd.focus();
+    					return;
+    				} 
+				if (x.my_pwd.value.indexOf(" ") >= 0) {
+    					alert("비밀번호에는 공백이 들어가면 안됩니다.");
+    					x.my_pwd.value=x.my_pwd_ok.value="";
+    					x.my_pwd.focus();
+    					return;
+    				}
+				for (i=0; i<x.my_pwd.value.length; i++) {
+      					if (alphaDigit.indexOf(x.my_pwd.value.substring(i, i+1)) < 0) {
+      						alert("비밀번호는 영문과 숫자의 조합만 사용할 수 있습니다.");
+     						x.my_pwd.value=x.my_pwd_ok.value="";
+      						x.my_pwd.focus();
+      						return;
+      					} 
+    				}
+				var mail = document.getElementById("my_mail");
+				var mail_count = 0;
+				var mail_count_id = 0;
+				var mail_count_domain = 0;
+				var mail_txt = mail.value;
+				if ( mail_txt == "" )
+				{
+					alert("메일 주소를 입력하세요.");
+				}
+				for(var i=0; i < mail_txt.length;i++)
+				{
+					if(mail_txt[i] == "@")
+					{
+						break;
+					}
+					mail_count_id++;
+				}
+				for(var i=0; i < mail_txt.length;i++) 
+				{ 
+					if(mail_txt[i] == "@")
+					{
+						mail_count++;
+					}
+				}
+				if(mail_count == 1)
+				{
+					alert(mail_count_id);
+					if(mail_txt[0] == "@")
+					{	
+						alert("이메일 아이디를 입력하세요.");
+						x.my_mail.focus();
+						x.my_mail.value = "";
+					}
+					if(mail_txt[mail_txt.length - 1] == "@")
+					{	
+						alert("이메일 도메인을 입력하세요.");
+						x.my_mail.focus();
+						x.my_mail.value = "";
+					}
+					for(var i=0; i < mail_txt.length;i++)
+					{
+						if(mail_txt[i] == ".")
+						{
+							mail_count_domain++;
+						}
+					}
+					if(mail_count_domain == 2 || mail_count_domain == 1)
+					{ 
+					}
+					else
+					{
+						alert("이메일 형식이 아닙니다.");
+						x.my_mail.focus();
+						x.my_mail.value = "";
+					}
+					if(mail_txt[mail_txt.length - 1] == ".")
+					{	
+						alert("이메일 도메인을 입력하세요.");
+						x.my_mail.focus();
+						x.my_mail.value = "";
+					}
+					if (x.my_mail.value.indexOf(" ") >= 0) {
+    						alert("이메일 ID에는 공백이 들어가면 안됩니다.");
+    						x.my_mail.focus();
+    						return;
+    					}
+    					for (i=0; i < mail_count_id; i++) {
+      						if (alphaDigit.indexOf(x.my_mail.value.substring(i, i+1)) == -1) {
+      							alert("이메일 ID는 영문과 숫자의 조합만 사용할 수 있습니다.");
+      							x.my_mail.focus();
+      							return;
+      						}
+    					}
+				}
+				else
+				{
+					alert("이메일 형식이 아닙니다.");
+					x.my_mail.focus();
+					x.my_mail.value = "";
+				}
+				
+				
+			}
+
+		</script>
+	</head>
+	<body>
+	<form action="MAILTO:zzana0219@naver.com" method="post"> 
+		<table border="1" align="center">
+			<tr>
+				<td bgcolor="#80c0f0" colspan="2" align="center"><b>회원 기본 정보</b></td>
+			</tr>
+			<tr>
+				<td align="center"><i>아이디 : </i></td>
+				<td><input type="text" id="my_id" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
+			</tr>
+			<tr>
+				<td align="center"><i>비밀번호 : </i></td>
+				<td><input type="password" id="my_pwd" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
+			</tr>
+			<tr>
+				<td align="center"><i>비밀번호 확인 : </i></td>
+				<td><input type="password" id="my_pwd_ok" size="10"></td>
+			</tr>
+			<tr>
+				<td align="center"><i>메일주소 : </i></td>
+				<td><input type="text" id="my_mail" size="15"> 예) id@domain.com</td>
+			</tr>
+			<tr>
+				<td align="center"><i>이름 : </i></td>
+				<td><input type="text" id="my_name" size="15"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#80c0f0" colspan="2" align="center"><b>개인 신상 정보</b></td>
+			</tr>
+			<tr>
+				<td align="center"><i>우편번호 :</i></td>
+				<td>
+				<input type="text" id="sample4_postcode" placeholder="우편번호">
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+				<input type="text" id="sample4_jibunAddress" placeholder="지번주소"><br>
+				<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+				<input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+			</tr>
+			<tr>
+				<td align="center"><i>주민등록번호 : </i></td>
+				<td><input type="text" id="my_reg" size="10"> - <input type="text" id="my_reg_2" size="10"> 예)1234561234567</td>
+			</tr>
+			<tr>
+				<td align="center"><i>생일 : </i></td>
+				<td>
+				<input type="text" id="my_year" size="5"> 년
+				<input type="text" id="my_month" size="5"> 월
+				<input type="text" id="my_day" size="5"> 일</td>
+			</tr>
+			
+			<tr>
+				<td align="center"><i>관심분야 : </i></td>
+				<td>
+				<input type="checkbox" name="interest" value="computer">컴퓨터
+				<input type="checkbox" name="interest" value="internet">인터넷
+				<input type="checkbox" name="interest" value="travel">여행
+				<input type="checkbox" name="interest" value="movie">영화감상
+				<input type="checkbox" name="interest" value="music">음악감상
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><i>자기소개 : </i></td>
+				<td><textarea id="my_intro" cols="54" rows="5"></textarea></td>
+			</tr>
+		</table>
+		<br>
+		<table  align="center">
+			<tr>
+				<td colspan="3" align="center">
+				<input type="button" value="회원가입" onclick="validate(this.form)">
+				<input type="reset" value="다시입력">
+				</td>
+			</tr>
+		</table>
+		</form>
+		<audio controls >
+  			<source src="BGM.ogg" type="audio/ogg">
+  			<source src="BGM.mp3" type="audio/mpeg">
+		</audio>
+	</body>
+</html>
