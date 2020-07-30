@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<meta charset="utf-8">
 		<title> 회원가입 페이지 </title>	
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script src="pos.js"></script>
 		<script src="no_vali_exc.js"></script>
+		<script src="no_vali_exc_2.js"></script>
 	</head>
 	<body>
 	<form action="MAILTO:zzana0219@naver.com" method="post"> 
@@ -14,23 +14,23 @@
 			</tr>
 			<tr>
 				<td align="center"><i>아이디 : </i></td>
-				<td><input type="text" id="my_id" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
+				<td><input type="text" id="my_id" name="my_id" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
 			</tr>
 			<tr>
 				<td align="center"><i>비밀번호 : </i></td>
-				<td><input type="password" id="my_pwd" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
+				<td><input type="password" id="my_pwd" name="my_pwd" size="10"> 4~12자의 영문 대소문자와 숫자로만 입력</td>
 			</tr>
 			<tr>
 				<td align="center"><i>비밀번호 확인 : </i></td>
-				<td><input type="password" id="my_pwd_ok" size="10"></td>
+				<td><input type="password" id="my_pwd_ok" name="my_pwd_ok" size="10"></td>
 			</tr>
 			<tr>
 				<td align="center"><i>메일주소 : </i></td>
-				<td><input type="text" id="my_mail" size="15"> 예) id@domain.com</td>
+				<td><input type="text" id="my_mail" name="my_mail" size="15"> 예) id@domain.com</td>
 			</tr>
 			<tr>
 				<td align="center"><i>이름 : </i></td>
-				<td><input type="text" id="my_name" size="15"></td>
+				<td><input type="text" id="my_name" name="my_name" size="15"></td>
 			</tr>
 			<tr>
 				<td bgcolor="#80c0f0" colspan="2" align="center"><b>개인 신상 정보</b></td>
@@ -38,23 +38,23 @@
 			<tr>
 				<td align="center"><i>우편번호 :</i></td>
 				<td>
-				<input type="text" id="sample4_postcode" placeholder="우편번호">
+				<input type="text" id="sample4_postcode" name="sample4_postcode" placeholder="우편번호">
 				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소"><br>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-				<input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
+				<input type="text" id="sample4_roadAddress" name="sample4_roadAddress" placeholder="도로명주소">
+				<input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" placeholder="지번주소"><br>
+				<input type="text" id="sample4_detailAddress" name="sample4_detailAddress" placeholder="상세주소">
+				<input type="text" id="sample4_extraAddress" name="sample4_extraAddress" placeholder="참고항목"></td>
 			</tr>
 			<tr>
 				<td align="center"><i>주민등록번호 : </i></td>
-				<td><input type="text" id="my_reg" size="10"> - <input type="text" id="my_reg_2" size="10"> 예)1234561234567</td>
+				<td><input type="text" id="my_reg" name="my_reg" size="10" onchange="regck1()"> - <input type="text" id="my_reg_2" name="my_reg_2" size="10" onchange="regck()"> 예)1234561234567</td>
 			</tr>
 			<tr>
 				<td align="center"><i>생일 : </i></td>
 				<td>
-				<input type="text" id="my_year" size="5"> 년
-				<input type="text" id="my_month" size="5"> 월
-				<input type="text" id="my_day" size="5"> 일</td>
+				<input type="text" id="my_year" name="my_year" size="5" readonly> 년
+				<input type="text" id="my_month" name="my_month" size="5" readonly> 월
+				<input type="text" id="my_day" name="my_day" size="5" readonly> 일</td>
 			</tr>
 			
 			<tr>
@@ -69,14 +69,14 @@
 			</tr>
 			<tr>
 				<td align="center"><i>자기소개 : </i></td>
-				<td><textarea id="my_intro" cols="54" rows="5"></textarea></td>
+				<td><textarea id="my_intro" name="my_intro" cols="54" rows="5"></textarea></td>
 			</tr>
 		</table>
 		<br>
 		<table  align="center">
 			<tr>
 				<td colspan="3" align="center">
-				<input type="button" value="회원가입" onclick="validate(this.form)">
+				<input type="submit" value="회원가입" onclick="validate(this.form)">
 				<input type="reset" value="다시입력">
 				</td>
 			</tr>
